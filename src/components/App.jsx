@@ -1,8 +1,9 @@
-import { Section } from './Section/Section';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './Layout/Layout';
 import UserForm from './UserForm/UserForm';
-import Contacts from './Contacts/Contacts';
-import Filter from './Filter/Filter';
+import Contacts from '../pages/ContactsPage/ContactsPage';
 import NotFound from './NotFound/NotFound';
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 
 import { useSelector } from 'react-redux';
 import { getContactsValue } from 'redux/contactsSlice';
@@ -11,17 +12,16 @@ const App = () => {
   const contacts = useSelector(getContactsValue);
 
   return (
-    <>
-      <Section>
-        <h1>Phonebook</h1>
-        <UserForm />
-
-        <h2>Contacts</h2>
-        <Filter />
-
-        {contacts.length ? <Contacts /> : <NotFound />}
-      </Section>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<UserForm />} />
+        <Route
+          path="contacts"
+          element={contacts.length ? <Contacts /> : <NotFound />}
+        />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 

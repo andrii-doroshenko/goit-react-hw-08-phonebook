@@ -7,18 +7,21 @@ const Filter = () => {
   const state = useSelector(getFilterValue);
 
   return (
-    <div className={CSS.filter}>
-      <label htmlFor="filter" className={CSS.userForm__label}>
-        Find contacts by name
-      </label>
-      <input
-        type="text"
-        id="filter"
-        className={CSS.filterInput}
-        onChange={e => dispatch(addFilter(e.target.value))}
-        value={state}
-      />
-    </div>
+    <>
+      <h2>Contacts</h2>
+      <div className={CSS.filter}>
+        <label htmlFor="filter" className={CSS.userForm__label}>
+          Find contacts by name
+        </label>
+        <input
+          type="text"
+          id="filter"
+          className={CSS.filterInput}
+          onChange={e => dispatch(addFilter(e.target.value))}
+          value={state}
+        />
+      </div>
+    </>
   );
 };
 

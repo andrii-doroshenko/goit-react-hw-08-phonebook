@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact, getContactsValue } from 'redux/contactsSlice';
 import { getFilterValue } from 'redux/filterSlice';
 import Card from 'components/Card/Card';
+import Filter from 'components/Filter/Filter';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -32,12 +33,15 @@ const Contacts = () => {
   };
 
   return (
-    <ul className={CSS.contacts}>
-      <Card
-        handleDeleteContact={handleDeleteContact}
-        filteredContacts={filteredContacts}
-      />
-    </ul>
+    <>
+      <Filter />
+      <ul className={CSS.contacts}>
+        <Card
+          handleDeleteContact={handleDeleteContact}
+          filteredContacts={filteredContacts}
+        />
+      </ul>
+    </>
   );
 };
 
