@@ -1,9 +1,8 @@
 import CSS from './UserForm.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addContact,
-  fetchContacts,
   getContactsValue,
   getLoadingValue,
 } from 'redux/contactsSlice';
@@ -54,10 +53,6 @@ const UserForm = () => {
     setNumber('');
   };
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
     <>
       <h1>Add new contact</h1>
@@ -74,7 +69,7 @@ const UserForm = () => {
           type="text"
           name="name"
           placeholder="Andrii"
-          pattern="^[a-zA-Zа-яА-Я]+([ -][a-zA-Zа-яА-Я]+)*$"
+          pattern="^[a-zA-Zа-яА-Я]+([-][a-zA-Zа-яА-Я]+)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           id="formNameInput"
@@ -90,7 +85,7 @@ const UserForm = () => {
           type="tel"
           name="number"
           placeholder="+380681234567"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          pattern="\+?\d{1,4}?[\\-.\\s]?\(?\d{1,3}?\)?[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           id="formNumberInput"

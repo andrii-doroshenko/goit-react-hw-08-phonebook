@@ -16,6 +16,7 @@ const Filter = () => {
         <input
           type="text"
           id="filter"
+          placeholder="Search..."
           className={CSS.filterInput}
           onChange={e => dispatch(addFilter(e.target.value))}
           value={state}

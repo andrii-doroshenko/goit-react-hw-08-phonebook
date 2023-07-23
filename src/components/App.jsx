@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import Layout from './Layout/Layout';
+import Layout from './Layout';
 import UserForm from './UserForm/UserForm';
 import Contacts from '../pages/ContactsPage/ContactsPage';
-import NotFound from './NotFound/NotFound';
+// import NotFound from './NotFound/NotFound';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 
 import { useSelector } from 'react-redux';
@@ -17,7 +17,8 @@ const App = () => {
         <Route index element={<UserForm />} />
         <Route
           path="contacts"
-          element={contacts.length ? <Contacts /> : <NotFound />}
+          // element={contacts.length ? <Contacts /> : <NotFound />}
+          element={<Contacts />}
         />
       </Route>
       <Route path="*" element={<NotFoundPage />} />

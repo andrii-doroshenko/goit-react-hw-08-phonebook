@@ -4,7 +4,6 @@ import { Section } from 'components/Section/Section';
 
 const Layout = () => {
   return (
-    //!написать в отдельній компонент Header
     <>
       <Header />
       <main>
