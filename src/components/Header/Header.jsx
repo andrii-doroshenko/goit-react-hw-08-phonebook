@@ -1,32 +1,15 @@
 import CSS from './Header.module.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import Navigation from 'components/Navigation/Navigation';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const location = useLocation();
-
   return (
     <header>
       <div className={CSS.container}>
-        <nav>
-          <ul>
-            <li>
-              <NavLink
-                to="/"
-                className={location.pathname === '/' ? CSS.active : ''}
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contacts"
-                className={location.pathname === '/contacts' ? CSS.active : ''}
-              >
-                Contacts
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+        <div className={CSS.logo}>
+          <Link to="/">Phonebook</Link>
+        </div>
+        <Navigation />
       </div>
     </header>
   );
