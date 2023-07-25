@@ -1,22 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from 'services/mockAPI';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  register,
+} from 'services/operations';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    items: [],
+    user: [],
+    token: null,
+    isLoggedIn: false,
+    isRefreshing: false,
     isLoading: false,
     error: null,
   },
 
   extraReducers: builder => {
     builder
+      .addCase(register.pending, (state, action) => {
+        return state;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addCase(register.rejected, (state, action) => {
+        console.log(action.payload);
+      })
       .addCase(fetchContacts.pending, state => {
         state.isLoading = true;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.user = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -27,7 +44,7 @@ export const contactsSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items.push(action.payload);
+        state.user.push(action.payload);
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -38,7 +55,7 @@ export const contactsSlice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = state.items.filter(
+        state.user = state.user.filter(
           contact => contact.id !== action.payload
         );
       })
@@ -52,5 +69,6 @@ export const contactsSlice = createSlice({
 export { fetchContacts, addContact, deleteContact };
 
 //Selectors
-export const getContactsValue = state => state.contacts.items;
+export const getContactsValue = state => state.contacts.user;
 export const getLoadingValue = state => state.contacts.isLoading;
+export const selectRegister = state => state.contacts.isLoading;
