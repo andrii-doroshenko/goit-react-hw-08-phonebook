@@ -8,10 +8,12 @@ const UserMenu = () => {
 
   return (
     <div className={CSS.userMenu}>
-      <BsFillPersonFill className={CSS.userIcon} />
-      <span className={CSS.userMenu__name}>
-        Welcom, <b>{users.name}</b>
-      </span>
+      <div className={CSS.userMenu__container}>
+        <BsFillPersonFill className={CSS.userIcon} />
+        <span className={CSS.userMenu__name}>
+          Welcom, <b>{users.name}</b>
+        </span>
+      </div>
       <button type="button" className={CSS.userMenu__btn}>
         Log out
       </button>

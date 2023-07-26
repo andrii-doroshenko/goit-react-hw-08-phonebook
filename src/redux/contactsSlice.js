@@ -4,6 +4,7 @@ import {
   addContact,
   deleteContact,
   register,
+  login,
 } from 'services/operations';
 
 export const contactsSlice = createSlice({
@@ -19,6 +20,16 @@ export const contactsSlice = createSlice({
 
   extraReducers: builder => {
     builder
+      .addCase(login.pending, (state, action) => {
+        state.isLoading = true;
+        return state;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      })
       .addCase(register.pending, (state, action) => {
         state.isLoading = true;
         return state;

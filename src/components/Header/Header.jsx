@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/contactsSlice';
 import Navigation from 'components/Navigation/Navigation';
 import UserMenu from 'components/UserMenu/UserMenu';
+import LoginMenu from 'components/LoginMenu/LoginMenu';
 
 const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -14,7 +15,8 @@ const Header = () => {
         <div className={CSS.logo}>
           <Link to="/">Phonebook</Link>
         </div>
-        {isLoggedIn ? <UserMenu /> : <Navigation />}
+        <Navigation />
+        {isLoggedIn ? <UserMenu /> : <LoginMenu />}
       </div>
     </header>
   );
