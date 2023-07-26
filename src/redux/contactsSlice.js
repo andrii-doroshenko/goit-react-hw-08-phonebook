@@ -20,10 +20,14 @@ export const contactsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(register.pending, (state, action) => {
+        state.isLoading = true;
         return state;
       })
       .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
         console.log(action.payload);
@@ -71,4 +75,4 @@ export { fetchContacts, addContact, deleteContact };
 //Selectors
 export const getContactsValue = state => state.contacts.user;
 export const getLoadingValue = state => state.contacts.isLoading;
-export const selectRegister = state => state.contacts.isLoading;
+export const selectIsLoggedIn = state => state.contacts.isLoggedIn;
