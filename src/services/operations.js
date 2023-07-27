@@ -7,9 +7,9 @@ const setAuthHeader = token => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common['Authorization'] = '';
-// };
+const clearAuthHeader = () => {
+  axios.defaults.headers.common['Authorization'] = '';
+};
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -40,34 +40,50 @@ export const login = createAsyncThunk(
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
+    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
 export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
-  async () => {
-    const { data } = await axios.get('/contacts/users');
-    console.log('get:', data);
-    return data;
+  'auth/fetchContacts',
+  async (_, thunkAPI) => {
+    try {
+      console.log(thunkAPI);
+      const resp = await axios.get('/contacts');
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async contact => {
-    const { data } = await axios.post('/contacts/users', contact);
-    console.log('post:', data);
-    return data;
+  'auth/addContact',
+  async (credentials, thunkAPI) => {
+    try {
+      const resp = await axios.post('/contacts', credentials);
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact',
-  async id => {
-    const { data } = await axios.delete(`/contacts/users/${id}`);
-    console.log('delete:', data);
-    return id;
+  'auth/deleteContact',
+  async (id, thunkAPI) => {
+    try {
+      const resp = await axios.delete(`/contacts/${id}`);
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
+  // async id => {
+  //   const { data } = await axios.delete(`/contacts/users/${id}`);
+  //   console.log('delete:', data);
+  //   return id;
+  // }
 );

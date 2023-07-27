@@ -1,18 +1,17 @@
 import CSS from './UserForm.module.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addContact,
-  getContactsValue,
-  getLoadingValue,
-} from 'redux/contactsSlice';
+import { addContact } from 'services/operations';
+import { selectContactsList } from 'redux/filterSlice';
+import { getLoadingValue } from 'redux/contactsSlice';
 import { Notify } from 'notiflix';
 
 const UserForm = () => {
-  const state = useSelector(getContactsValue);
+  const contactList = useSelector(selectContactsList);
   const isLoading = useSelector(getLoadingValue);
   const dispatch = useDispatch();
 
+  //state for adding contact values
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -37,7 +36,7 @@ const UserForm = () => {
     e.preventDefault();
 
     if (
-      state.some(
+      contactList.some(
         contact =>
           contact.name.toLowerCase() === name.toLowerCase() ||
           contact.number === number

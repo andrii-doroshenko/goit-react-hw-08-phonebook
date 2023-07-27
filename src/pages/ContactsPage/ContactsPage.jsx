@@ -1,13 +1,12 @@
 import CSS from './Contacts.module.css';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchContacts, deleteContact } from 'services/operations';
 import {
   getLoadingValue,
-  fetchContacts,
-  getContactsValue,
-  deleteContact,
+  // getContactsValue,
 } from 'redux/contactsSlice';
-import { getFilterValue } from 'redux/filterSlice';
+import { getFilterValue, selectContactsList } from 'redux/filterSlice';
 import Card from 'components/Card/Card';
 import Filter from 'components/Filter/Filter';
 import NotFound from 'components/NotFound/NotFound';
@@ -15,16 +14,16 @@ import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const Contacts = () => {
-  const contacts = useSelector(getContactsValue);
+  const dispatch = useDispatch();
+  const contactsList = useSelector(selectContactsList);
   const isLoading = useSelector(getLoadingValue);
   const filterValue = useSelector(getFilterValue);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const filteredContacts = contacts.filter(contact =>
+  const filteredContacts = contactsList.filter(contact =>
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
@@ -50,7 +49,7 @@ const Contacts = () => {
 
       {isLoading ? (
         <p>Loading...</p>
-      ) : contacts.length ? (
+      ) : contactsList.length ? (
         <ul className={CSS.contacts}>
           <Card
             handleDeleteContact={handleDeleteContact}

@@ -4,7 +4,7 @@ import { addFilter, getFilterValue } from 'redux/filterSlice';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const state = useSelector(getFilterValue);
+  const formState = useSelector(getFilterValue); //state.filter
 
   return (
     <>
@@ -19,7 +19,7 @@ const Filter = () => {
           placeholder="Search..."
           className={CSS.filterInput}
           onChange={e => dispatch(addFilter(e.target.value))}
-          value={state}
+          value={formState}
         />
       </div>
     </>

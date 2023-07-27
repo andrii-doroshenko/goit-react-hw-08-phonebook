@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchContacts,
-  addContact,
-  deleteContact,
+  // fetchContacts,
+  // addContact,
+  // deleteContact,
   register,
   login,
   logOut,
@@ -32,7 +32,8 @@ export const contactsSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(logOut.rejected, (_, action) => {
+      .addCase(logOut.rejected, (state, action) => {
+        state.isLoading = false;
         console.log(action.payload);
       })
       //login
@@ -58,48 +59,39 @@ export const contactsSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
         console.log(action.payload);
-      })
-      //!..........................................................delet
-      .addCase(fetchContacts.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
-      })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
-      })
-      .addCase(addContact.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user.push(action.payload);
-      })
-      .addCase(addContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
-      })
-      .addCase(deleteContact.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = state.user.filter(
-          contact => contact.id !== action.payload
-        );
-      })
-      .addCase(deleteContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
       });
+    // // addContacts
+    // .addCase(addContact.pending, state => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(addContact.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   // state.user.push(action.payload);
+    //   state.user = action.payload.user;
+    // })
+    // .addCase(addContact.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.error.message;
+    // });
+    // .addCase(deleteContact.pending, state => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(deleteContact.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.user = state.user.filter(
+    //     contact => contact.id !== action.payload
+    //   );
+    // })
+    // .addCase(deleteContact.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.error.message;
+    // });
   },
 });
 
-export { fetchContacts, addContact, deleteContact };
+// export { fetchContacts, addContact, deleteContact };
 
 //Selectors
 export const getContactsValue = state => state.contacts.user;
