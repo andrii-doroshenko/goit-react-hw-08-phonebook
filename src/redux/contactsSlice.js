@@ -5,12 +5,13 @@ import {
   deleteContact,
   register,
   login,
+  logOut,
 } from 'services/operations';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    user: [],
+    user: { name: null, email: null },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -20,6 +21,21 @@ export const contactsSlice = createSlice({
 
   extraReducers: builder => {
     builder
+      //logout
+      .addCase(logOut.pending, (state, _) => {
+        state.isLoading = true;
+        return state;
+      })
+      .addCase(logOut.fulfilled, (state, _) => {
+        state.isLoading = false;
+        state.user = { name: null, email: null };
+        state.token = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(logOut.rejected, (_, action) => {
+        console.log(action.payload);
+      })
+      //login
       .addCase(login.pending, (state, action) => {
         state.isLoading = true;
         return state;
@@ -30,6 +46,7 @@ export const contactsSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
+      //registration
       .addCase(register.pending, (state, action) => {
         state.isLoading = true;
         return state;
@@ -43,6 +60,7 @@ export const contactsSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         console.log(action.payload);
       })
+      //!..........................................................delet
       .addCase(fetchContacts.pending, state => {
         state.isLoading = true;
       })
