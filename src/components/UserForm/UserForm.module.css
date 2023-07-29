@@ -24,6 +24,7 @@
 }
 
 .userForm__btn {
+  margin-bottom: 10px;
   background-color: #4b9ce2;
   color: #fff;
   border-radius: 5px;
@@ -42,4 +43,14 @@
 .userForm__btn:hover,
 .userForm__btn:focus {
   background-color: #1565c0;
+}
+
+.warningLink:hover,
+.warningLink:focus {
+  color: #1565c0;
+}
+
+.greeting {
+  margin-bottom: 20px;
+  text-align: center;
 }

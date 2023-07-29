@@ -5,14 +5,14 @@ import { selectIsLoggedIn } from 'redux/contactsSlice';
 import UserMenu from 'components/UserMenu/UserMenu';
 import LoginMenu from 'components/LoginMenu/LoginMenu';
 
-const Navigation = ({ children }) => {
+const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <nav className={CSS.navigation}>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Add contact</Link>
         </li>
         {isLoggedIn && (
           <li>

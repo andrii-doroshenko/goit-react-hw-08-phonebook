@@ -2,10 +2,7 @@ import CSS from './Contacts.module.css';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts, deleteContact } from 'services/operations';
-import {
-  getLoadingValue,
-  // getContactsValue,
-} from 'redux/contactsSlice';
+import { getLoadingValue } from 'redux/contactsSlice';
 import { getFilterValue, selectContactsList } from 'redux/filterSlice';
 import Card from 'components/Card/Card';
 import Filter from 'components/Filter/Filter';
@@ -35,10 +32,10 @@ const Contacts = () => {
       'No',
       () => {
         dispatch(deleteContact(id));
-        Notify.success(`The contact has been deleted!`);
+        Notify.success(`The contact has been deleted!`, { clickToClose: true });
       },
       () => {
-        Notify.info('Deletion canceled!');
+        Notify.info('Deletion canceled!', { clickToClose: true });
       }
     );
   };

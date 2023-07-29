@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  // fetchContacts,
-  // addContact,
-  // deleteContact,
-  register,
-  login,
-  logOut,
-} from 'services/operations';
+import { register, login, logOut, refreshUser } from 'services/operations';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
@@ -14,9 +7,9 @@ export const contactsSlice = createSlice({
     user: { name: null, email: null },
     token: null,
     isLoggedIn: false,
-    isRefreshing: false,
     isLoading: false,
     error: null,
+    isRefreshing: false,
   },
 
   extraReducers: builder => {
@@ -32,12 +25,11 @@ export const contactsSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(logOut.rejected, (state, action) => {
+      .addCase(logOut.rejected, (state, _) => {
         state.isLoading = false;
-        console.log(action.payload);
       })
       //login
-      .addCase(login.pending, (state, action) => {
+      .addCase(login.pending, (state, _) => {
         state.isLoading = true;
         return state;
       })
@@ -48,7 +40,7 @@ export const contactsSlice = createSlice({
         state.isLoggedIn = true;
       })
       //registration
-      .addCase(register.pending, (state, action) => {
+      .addCase(register.pending, (state, _) => {
         state.isLoading = true;
         return state;
       })
@@ -60,40 +52,28 @@ export const contactsSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+      })
+      //is refreshing page
+      .addCase(refreshUser.pending, (state, _) => {
+        state.isRefreshing = true;
+        state.isLoading = true;
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isRefreshing = false;
+        state.user = action.payload;
+        state.isLoggedIn = true;
+      })
+      .addCase(refreshUser.rejected, (state, _) => {
+        state.isLoading = false;
+        state.isRefreshing = false;
       });
-    // // addContacts
-    // .addCase(addContact.pending, state => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(addContact.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   // state.user.push(action.payload);
-    //   state.user = action.payload.user;
-    // })
-    // .addCase(addContact.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.error.message;
-    // });
-    // .addCase(deleteContact.pending, state => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(deleteContact.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.user = state.user.filter(
-    //     contact => contact.id !== action.payload
-    //   );
-    // })
-    // .addCase(deleteContact.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.error.message;
-    // });
   },
 });
-
-// export { fetchContacts, addContact, deleteContact };
 
 //Selectors
 export const getContactsValue = state => state.contacts.user;
 export const getLoadingValue = state => state.contacts.isLoading;
 export const selectIsLoggedIn = state => state.contacts.isLoggedIn;
+export const selectIsRefreshing = state => state.contacts.isRefreshing;
+export const selectToken = state => state.contacts.token;

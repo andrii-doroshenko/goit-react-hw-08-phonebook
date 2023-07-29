@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -19,6 +20,7 @@ export const register = createAsyncThunk(
       setAuthHeader(resp.data.token);
       return resp.data;
     } catch (error) {
+      Notify.failure(`${error.message}. Please try again`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -27,6 +29,13 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
+    const { token } = thunkAPI.getState().contacts;
+
+    if (!token) {
+      Notify.info('Please register first', { clickToClose: true });
+      return;
+    }
+
     try {
       const resp = await axios.post('users/login', credentials);
       setAuthHeader(resp.data.token);
@@ -50,7 +59,6 @@ export const fetchContacts = createAsyncThunk(
   'auth/fetchContacts',
   async (_, thunkAPI) => {
     try {
-      console.log(thunkAPI);
       const resp = await axios.get('/contacts');
       return resp.data;
     } catch (error) {
@@ -81,9 +89,24 @@ export const deleteContact = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-  // async id => {
-  //   const { data } = await axios.delete(`/contacts/users/${id}`);
-  //   console.log('delete:', data);
-  //   return id;
-  // }
+);
+
+// refreshing state when App is reloading
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const { token } = thunkAPI.getState().contacts;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue('No valid token');
+    }
+
+    setAuthHeader(token);
+    try {
+      const resp = await axios.get('/users/current');
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
 );

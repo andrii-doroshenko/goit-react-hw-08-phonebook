@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { login } from 'services/operations';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +23,9 @@ const LoginForm = () => {
 
   return (
     <>
+      <p>
+        Login or <Link to="/register">register</Link> please.
+      </p>
       <form
         action=""
         autoComplete="off"

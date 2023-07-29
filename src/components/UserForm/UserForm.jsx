@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'services/operations';
 import { selectContactsList } from 'redux/filterSlice';
-import { getLoadingValue } from 'redux/contactsSlice';
+import { selectIsLoggedIn, selectToken } from 'redux/contactsSlice';
 import { Notify } from 'notiflix';
+import { Link } from 'react-router-dom';
 
 const UserForm = () => {
   const contactList = useSelector(selectContactsList);
-  const isLoading = useSelector(getLoadingValue);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
 
   //state for adding contact values
@@ -35,6 +37,13 @@ const UserForm = () => {
   const handleAddUser = e => {
     e.preventDefault();
 
+    if (!token) {
+      Notify.info('Please register first', { clickToClose: true });
+      setName('');
+      setNumber('');
+      return;
+    }
+
     if (
       contactList.some(
         contact =>
@@ -42,19 +51,31 @@ const UserForm = () => {
           contact.number === number
       )
     ) {
-      Notify.warning(`${name} is already in contacts`);
+      Notify.warning(`${name} is already in contacts`, { clickToClose: true });
+      setName('');
+      setNumber('');
       return;
     }
 
     dispatch(addContact({ name, number }));
-    Notify.success(`${name} has been added!`);
+    Notify.success(`${name} has been added!`, { clickToClose: true });
     setName('');
     setNumber('');
   };
 
   return (
     <>
-      <h1>Add new contact</h1>
+      {!isLoggedIn ? (
+        <div className={CSS.greeting}>
+          <h1>Welcom to phonebook App</h1>
+          <Link className={CSS.warningLink} to="/login">
+            Please login for adding new contacts
+          </Link>
+        </div>
+      ) : (
+        <p>Add new contact</p>
+      )}
+
       <form
         action=""
         autoComplete="off"
@@ -67,7 +88,6 @@ const UserForm = () => {
         <input
           type="text"
           name="name"
-          placeholder="Andrii"
           pattern="^[a-zA-Zа-яА-Я]+([\-][a-zA-Zа-яА-Я]+)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -83,7 +103,6 @@ const UserForm = () => {
         <input
           type="tel"
           name="number"
-          placeholder="+380681234567"
           pattern="\+?\d{1,4}?[\\-.\\s]?\(?\d{1,3}?\)?[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
@@ -93,12 +112,8 @@ const UserForm = () => {
           onChange={handleStateChange}
         />
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={CSS.userForm__btn}
-        >
-          {isLoading ? 'Loading...' : 'Add Contact'}
+        <button type="submit" className={CSS.userForm__btn}>
+          Add Contact
         </button>
       </form>
     </>

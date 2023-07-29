@@ -6,6 +6,7 @@ export const filterSlice = createSlice({
   initialState: {
     contactsList: [],
     filter: '',
+    isLoading: false,
   },
   reducers: {
     addFilter: (state, action) => {
@@ -33,10 +34,7 @@ export const filterSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(state);
-        console.log(action);
-        state.contactsList.unshift(action.payload);
-        //! state.user = action.payload.user;
+        state.contactsList.push(action.payload);
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
