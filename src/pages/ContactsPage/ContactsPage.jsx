@@ -40,22 +40,26 @@ const Contacts = () => {
     );
   };
 
+  const hasContacts = contactsList.length > 0;
+
   return (
     <>
       <Filter />
 
       {isLoading ? (
         <p>Loading...</p>
-      ) : contactsList.length ? (
-        <ul className={CSS.contacts}>
-          <Card
-            handleDeleteContact={handleDeleteContact}
-            filteredContacts={filteredContacts}
-          />
-        </ul>
       ) : (
-        <NotFound />
+        hasContacts && (
+          <ul className={CSS.contacts}>
+            <Card
+              handleDeleteContact={handleDeleteContact}
+              filteredContacts={filteredContacts}
+            />
+          </ul>
+        )
       )}
+
+      {!isLoading && !hasContacts && <NotFound />}
     </>
   );
 };

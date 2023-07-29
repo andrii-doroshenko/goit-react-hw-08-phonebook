@@ -1,18 +1,18 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import UserForm from './UserForm/UserForm';
+import Preloader from './Preloader/Preloader';
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
 import { refreshUser } from 'services/operations';
 import { selectIsRefreshing } from 'redux/contactsSlice';
 import { RestrictedRout } from './RestrictedRout';
 import { PrivateRout } from './PrivateRout';
-import Preloader from './Preloader/Preloader';
 
 const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
   const dispatch = useDispatch();

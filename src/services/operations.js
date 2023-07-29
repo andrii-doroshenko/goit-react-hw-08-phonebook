@@ -29,18 +29,14 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
-    const { token } = thunkAPI.getState().contacts;
-
-    if (!token) {
-      Notify.info('Please register first', { clickToClose: true });
-      return;
-    }
-
     try {
       const resp = await axios.post('users/login', credentials);
       setAuthHeader(resp.data.token);
       return resp.data;
     } catch (error) {
+      Notify.failure(`${error.message}. Try again please.`, {
+        clickToClose: true,
+      });
       return thunkAPI.rejectWithValue(error.message);
     }
   }
