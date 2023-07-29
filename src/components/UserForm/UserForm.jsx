@@ -38,7 +38,9 @@ const UserForm = () => {
     e.preventDefault();
 
     if (!token) {
-      Notify.info('Please register first', { clickToClose: true });
+      Notify.warning('Please register first', {
+        clickToClose: true,
+      });
       setName('');
       setNumber('');
       return;
