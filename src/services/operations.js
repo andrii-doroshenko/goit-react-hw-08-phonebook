@@ -34,7 +34,7 @@ export const login = createAsyncThunk(
       setAuthHeader(resp.data.token);
       return resp.data;
     } catch (error) {
-      Notify.failure(`${error.message}. Try again please.`, {
+      Notify.failure(`There was a problem with your login.`, {
         clickToClose: true,
       });
       return thunkAPI.rejectWithValue(error.message);

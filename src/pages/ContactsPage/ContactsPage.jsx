@@ -33,9 +33,6 @@ const Contacts = () => {
       () => {
         dispatch(deleteContact(id));
         Notify.success(`The contact has been deleted!`, { clickToClose: true });
-      },
-      () => {
-        Notify.info('Deletion canceled!', { clickToClose: true });
       }
     );
   };

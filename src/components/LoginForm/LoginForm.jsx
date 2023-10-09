@@ -12,6 +12,7 @@ const LoginForm = () => {
   const handleSubmite = e => {
     e.preventDefault();
     const form = e.currentTarget;
+
     dispatch(
       login({
         email: form.elements.email.value,
@@ -28,7 +29,6 @@ const LoginForm = () => {
       </p>
       <form
         action=""
-        autoComplete="off"
         className={CSS.userForm}
         onSubmit={handleSubmite}
       >
@@ -41,6 +41,7 @@ const LoginForm = () => {
           title="Please enter a valid email address."
           required
           id="formEmailInput"
+          placeholder='example@mail.com'
           className={CSS.userForm__input}
         />
 
