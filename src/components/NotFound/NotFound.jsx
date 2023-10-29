@@ -1,5 +1,4 @@
 import emptyImg from 'images/noImage.webp';
-import { Link } from 'react-router-dom';
 import CSS from './NotFound.module.css';
 
 const NotFound = () => (
@@ -12,7 +11,7 @@ const NotFound = () => (
       height={250}
     />
     <b>
-      Phonebook is empty! You can add your contacts <Link to="/">here</Link>.
+      Your phonebook is empty!
     </b>
   </picture>
 );

@@ -11,9 +11,6 @@ const Navigation = () => {
   return (
     <nav className={CSS.navigation}>
       <ul>
-        <li>
-          <Link to="/">Add contact</Link>
-        </li>
         {isLoggedIn && (
           <li>
             <Link to="/contacts">Contacts</Link>

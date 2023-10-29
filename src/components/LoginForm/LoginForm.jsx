@@ -24,9 +24,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <p>
-        Login or <Link to="/register">register</Link> please.
-      </p>
+      <h2>Log in</h2>
       <form
         action=""
         className={CSS.userForm}

@@ -3,13 +3,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'services/operations';
 import { selectContactsList } from 'redux/filterSlice';
-import { selectIsLoggedIn, selectToken } from 'redux/contactsSlice';
+import { selectToken } from 'redux/contactsSlice';
 import { Notify } from 'notiflix';
-import { Link } from 'react-router-dom';
 
 const UserForm = () => {
   const contactList = useSelector(selectContactsList);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
 
@@ -66,17 +65,8 @@ const UserForm = () => {
   };
 
   return (
-    <>
-      {!isLoggedIn ? (
-        <div className={CSS.greeting}>
-          <h1>Welcom to phonebook App</h1>
-          <Link className={CSS.warningLink} to="/login">
-            Please login for adding new contacts
-          </Link>
-        </div>
-      ) : (
-        <p>Add new contact</p>
-      )}
+    <div className={CSS.container}>
+      <h2>Add Contact</h2>
 
       <form
         action=""
@@ -90,7 +80,7 @@ const UserForm = () => {
         <input
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+([\-][a-zA-Zа-яА-Я]+)*$"
+          pattern="^[a-zA-Zа-яА-Я]+([ -][a-zA-Zа-яА-Я]+)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           id="formNameInput"
@@ -105,7 +95,7 @@ const UserForm = () => {
         <input
           type="tel"
           name="number"
-          pattern="\+?\d{1,4}?[\\-.\\s]?\(?\d{1,3}?\)?[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,4}[\\-.\\s]?\d{1,9}"
+          pattern="^(\+?\d{0,4}[\s-]?)?\(?\d{1,3}\)?[\s-]?\d{1,4}[\s-]?\d{1,4}[\s-]?\d{1,9}$"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           id="formNumberInput"
@@ -118,7 +108,7 @@ const UserForm = () => {
           Add Contact
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

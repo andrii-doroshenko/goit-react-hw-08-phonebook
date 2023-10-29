@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
-import UserForm from './UserForm/UserForm';
 import Preloader from './Preloader/Preloader';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,7 @@ import { refreshUser } from 'services/operations';
 import { selectIsRefreshing } from 'redux/contactsSlice';
 import { RestrictedRout } from './RestrictedRout';
 import { PrivateRout } from './PrivateRout';
+import HomePage from 'pages/HomePage/HomePage';
 
 const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -29,7 +29,7 @@ const App = () => {
       ) : (
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<UserForm />} />
+            <Route index element={<HomePage />} />
             <Route
               path="/login"
               element={

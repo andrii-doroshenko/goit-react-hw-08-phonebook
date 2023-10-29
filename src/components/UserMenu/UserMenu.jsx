@@ -16,9 +16,7 @@ const UserMenu = () => {
     <div className={CSS.userMenu}>
       <div className={CSS.userMenu__container}>
         <BsFillPersonFill className={CSS.userIcon} />
-        <span className={CSS.userMenu__name}>
-          Welcom, <b>{users.name}</b>
-        </span>
+        <b>{users.name}</b>
       </div>
       <button
         type="button"

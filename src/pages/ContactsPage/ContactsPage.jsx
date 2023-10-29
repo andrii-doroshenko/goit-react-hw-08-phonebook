@@ -9,8 +9,9 @@ import Filter from 'components/Filter/Filter';
 import NotFound from 'components/NotFound/NotFound';
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import UserForm from 'components/UserForm/UserForm';
 
-const Contacts = () => {
+const ContactsPage = () => {
   const dispatch = useDispatch();
   const contactsList = useSelector(selectContactsList);
   const isLoading = useSelector(getLoadingValue);
@@ -41,6 +42,7 @@ const Contacts = () => {
 
   return (
     <>
+      <UserForm />
       <Filter />
 
       {isLoading ? (
@@ -61,4 +63,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default ContactsPage;

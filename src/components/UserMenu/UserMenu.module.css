@@ -15,4 +15,17 @@
 .userMenu__btn {
   height: 30px;
   border-radius: 5px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  color: #4b9ce2;
+  padding: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.userMenu__btn:hover {
+  background-color: #1565c0;
+  color: #fff;
 }

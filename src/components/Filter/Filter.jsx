@@ -4,11 +4,10 @@ import { addFilter, getFilterValue } from 'redux/filterSlice';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const formState = useSelector(getFilterValue); //state.filter
+  const formState = useSelector(getFilterValue);
 
   return (
     <>
-      <h2>Contacts</h2>
       <div className={CSS.filter}>
         <label htmlFor="filter" className={CSS.userForm__label}>
           Find contacts by name
