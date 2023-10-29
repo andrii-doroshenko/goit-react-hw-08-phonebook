@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { login } from 'services/operations';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
