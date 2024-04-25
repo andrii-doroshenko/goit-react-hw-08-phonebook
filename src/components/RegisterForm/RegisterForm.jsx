@@ -24,7 +24,6 @@ const RegisterForm = () => {
   return (
     <>
       <form
-        action=""
         autoComplete="off"
         className={CSS.userForm}
         onSubmit={handleSubmite}

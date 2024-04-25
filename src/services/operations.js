@@ -20,6 +20,10 @@ export const register = createAsyncThunk(
       setAuthHeader(resp.data.token);
       return resp.data;
     } catch (error) {
+      if (error.response.data.code === 11000) {
+        Notify.failure(`This email is already Exists. Please try again`);
+        return thunkAPI.rejectWithValue(error.message);
+      }
       Notify.failure(`${error.message}. Please try again`);
       return thunkAPI.rejectWithValue(error.message);
     }
