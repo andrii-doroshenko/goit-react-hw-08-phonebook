@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/phonebook/static/css/main.6eb5b14c.css",
-    "main.js": "/phonebook/static/js/main.b1105aa1.js",
+    "main.js": "/phonebook/static/js/main.e6aab832.js",
     "static/css/564.c30b71eb.chunk.css": "/phonebook/static/css/564.c30b71eb.chunk.css",
     "static/js/564.f884d601.chunk.js": "/phonebook/static/js/564.f884d601.chunk.js",
     "static/css/268.06f39f77.chunk.css": "/phonebook/static/css/268.06f39f77.chunk.css",
     "static/js/268.4e75573c.chunk.js": "/phonebook/static/js/268.4e75573c.chunk.js",
     "static/css/488.89a7134b.chunk.css": "/phonebook/static/css/488.89a7134b.chunk.css",
-    "static/js/488.907226e9.chunk.js": "/phonebook/static/js/488.907226e9.chunk.js",
+    "static/js/488.434483cf.chunk.js": "/phonebook/static/js/488.434483cf.chunk.js",
     "static/js/503.a0653309.chunk.js": "/phonebook/static/js/503.a0653309.chunk.js",
     "static/media/noImage.webp": "/phonebook/static/media/noImage.26010760a8269f450f58.webp",
     "index.html": "/phonebook/index.html",
     "main.6eb5b14c.css.map": "/phonebook/static/css/main.6eb5b14c.css.map",
-    "main.b1105aa1.js.map": "/phonebook/static/js/main.b1105aa1.js.map",
+    "main.e6aab832.js.map": "/phonebook/static/js/main.e6aab832.js.map",
     "564.c30b71eb.chunk.css.map": "/phonebook/static/css/564.c30b71eb.chunk.css.map",
     "564.f884d601.chunk.js.map": "/phonebook/static/js/564.f884d601.chunk.js.map",
     "268.06f39f77.chunk.css.map": "/phonebook/static/css/268.06f39f77.chunk.css.map",
     "268.4e75573c.chunk.js.map": "/phonebook/static/js/268.4e75573c.chunk.js.map",
     "488.89a7134b.chunk.css.map": "/phonebook/static/css/488.89a7134b.chunk.css.map",
-    "488.907226e9.chunk.js.map": "/phonebook/static/js/488.907226e9.chunk.js.map",
+    "488.434483cf.chunk.js.map": "/phonebook/static/js/488.434483cf.chunk.js.map",
     "503.a0653309.chunk.js.map": "/phonebook/static/js/503.a0653309.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6eb5b14c.css",
-    "static/js/main.b1105aa1.js"
+    "static/js/main.e6aab832.js"
   ]
 }
